@@ -32,16 +32,16 @@ linux_dedicated:
   - export CCACHE_DIR="$PWD/ccache"
   - ccache --show-stats
   script:
-  - mkdir out2
-  - cd out2
+  - mkdir $CI_JOB_STAGE
+  - cd $CI_JOB_STAGE
   - export CC="gcc -m32"
   - export CXX="gcc -m32"
   - cmake -DXASH_DOWNLOAD_DEPENDENCIES=yes -DXASH_SDL=OFF -DXASH_DEDICATED=ON -DXASH_STATIC=ON -DXASH_DLL_LOADER=ON -DXASH_VGUI=OFF -DCMAKE_BUILD_TYPE=RelWithDebInfo ../
   - make -j2
   artifacts:
     paths:
-    - out2/engine/xash3d
-    
+    - $CI_JOB_STAGE/engine/xash3d
+
 linux_dedicated_bionic:
   image: ubuntu:bionic
   stage: linux_dedicated_bionic
@@ -60,15 +60,15 @@ linux_dedicated_bionic:
   - export CCACHE_DIR="$PWD/ccache"
   - ccache --show-stats
   script:
-  - mkdir out2
-  - cd out2
+  - mkdir $CI_JOB_STAGE
+  - cd $CI_JOB_STAGE
   - export CC="gcc -m32"
   - export CXX="gcc -m32"
   - cmake -DXASH_DOWNLOAD_DEPENDENCIES=yes -DXASH_SDL=OFF -DXASH_DEDICATED=ON -DXASH_STATIC=ON -DXASH_DLL_LOADER=ON -DXASH_VGUI=OFF -DCMAKE_BUILD_TYPE=RelWithDebInfo ../
   - make -j2
   artifacts:
     paths:
-    - out2/engine/xash3d
+    - $CI_JOB_STAGE/engine/xash3d
 
 linux_desktop:
   image: ubuntu:xenial
@@ -96,8 +96,8 @@ linux_desktop:
   - mkdir -p ../sdl2-linux
   - make install DESTDIR=$CI_PROJECT_DIR/sdl2-linux
   - cd ../
-  - mkdir out
-  - cd out
+  - mkdir $CI_JOB_STAGE
+  - cd $CI_JOB_STAGE
   - export CC="gcc -m32"
   - export CXX="gcc -m32"
   - cmake -DCMAKE_PREFIX_PATH=$CI_PROJECT_DIR/sdl2-linux/usr/local -DXASH_DOWNLOAD_DEPENDENCIES=yes -DXASH_STATIC=ON -DXASH_DLL_LOADER=ON -DXASH_VGUI=ON -DMAINUI_USE_STB=ON -DCMAKE_BUILD_TYPE=RelWithDebInfo ../
@@ -111,8 +111,8 @@ linux_desktop:
   - cp $CI_PROJECT_DIR/sdl2-linux/usr/local/lib/$(readlink $CI_PROJECT_DIR/sdl2-linux/usr/local/lib/libSDL2-2.0.so.0) artifacts/libSDL2-2.0.so.0
   artifacts:
     paths:
-    - out/artifacts/
-    
+    - $CI_JOB_STAGE/artifacts/
+
 linux_desktop_bionic:
   image: ubuntu:bionic
   stage: linux_desktop_bionic
@@ -139,8 +139,8 @@ linux_desktop_bionic:
   - mkdir -p ../sdl2-linux
   - make install DESTDIR=$CI_PROJECT_DIR/sdl2-linux
   - cd ../
-  - mkdir out
-  - cd out
+  - mkdir $CI_JOB_STAGE
+  - cd $CI_JOB_STAGE
   - export CC="gcc -m32"
   - export CXX="gcc -m32"
   - cmake -DCMAKE_PREFIX_PATH=$CI_PROJECT_DIR/sdl2-linux/usr/local -DXASH_DOWNLOAD_DEPENDENCIES=yes -DXASH_STATIC=ON -DXASH_DLL_LOADER=ON -DXASH_VGUI=ON -DMAINUI_USE_STB=ON -DCMAKE_BUILD_TYPE=RelWithDebInfo ../
@@ -154,7 +154,7 @@ linux_desktop_bionic:
   - cp $CI_PROJECT_DIR/sdl2-linux/usr/local/lib/$(readlink $CI_PROJECT_DIR/sdl2-linux/usr/local/lib/libSDL2-2.0.so.0) artifacts/libSDL2-2.0.so.0
   artifacts:
     paths:
-    - out/artifacts/
+    - $CI_JOB_STAGE/artifacts/
 
 android:
   image: ubuntu:xenial
