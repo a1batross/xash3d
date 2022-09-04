@@ -19,9 +19,9 @@ linux_dedicated:
   image: mr0maks/build_xash:xenial_dedicated
   stage: linux_dedicated
   before_script:
-  - dpkg --add-architecture i386
-  - apt update
-  - apt install -y git cmake ccache p7zip-full gcc-multilib g++-multilib build-essential zlib1g:i386 libstdc++6:i386 libunwind-dev:i386
+#  - dpkg --add-architecture i386
+#  - apt update
+#  - apt install -y git cmake ccache p7zip-full gcc-multilib g++-multilib build-essential zlib1g:i386 libstdc++6:i386 libunwind-dev:i386
   - mkdir -p ccache
   - export PATH="/usr/lib/ccache:$PATH"
   - export CCACHE_BASEDIR="$PWD"
@@ -48,9 +48,9 @@ linux_dedicated_bionic:
   image: mr0maks/build_xash:bionic_dedicated
   stage: linux_dedicated_bionic
   before_script:
-  - dpkg --add-architecture i386
-  - apt update
-  - apt install -y git cmake ccache p7zip-full gcc-multilib g++-multilib build-essential zlib1g:i386 libstdc++6:i386 libunwind-dev:i386
+#  - dpkg --add-architecture i386
+#  - apt update
+#  - apt install -y git cmake ccache p7zip-full gcc-multilib g++-multilib build-essential zlib1g:i386 libstdc++6:i386 libunwind-dev:i386
   - mkdir -p ccache
   - export PATH="/usr/lib/ccache:$PATH"
   - export CCACHE_BASEDIR="$PWD"
@@ -73,12 +73,13 @@ linux_dedicated_bionic:
     - $CI_JOB_STAGE/engine/xash3d
 
 linux_desktop:
-  image: ubuntu:xenial
+#  image: ubuntu:xenial
+  image: mr0maks/build_xash:xenial_desktop
   stage: linux_desktop
   before_script:
-  - dpkg --add-architecture i386
-  - apt update
-  - apt install -y git curl ccache cmake p7zip-full gcc-multilib g++-multilib build-essential libx11-dev:i386 libxext-dev:i386 libgl1-mesa-dev libasound-dev zlib1g:i386 libstdc++6:i386 libunwind-dev:i386
+#  - dpkg --add-architecture i386
+#  - apt update
+#  - apt install -y git curl ccache cmake p7zip-full gcc-multilib g++-multilib build-essential libx11-dev:i386 libxext-dev:i386 libgl1-mesa-dev libasound-dev zlib1g:i386 libstdc++6:i386 libunwind-dev:i386
   - mkdir -p ccache
   - export PATH="/usr/lib/ccache:$PATH"
   - export CCACHE_BASEDIR="$PWD"
@@ -159,12 +160,13 @@ linux_desktop_bionic:
     - $CI_JOB_STAGE/artifacts/
 
 android:
-  image: ubuntu:xenial
+#  image: ubuntu:xenial
+  image: mr0maks/build_xash:xenial_android
   stage: android
   before_script:
-  - dpkg --add-architecture i386
-  - apt update
-  - apt install -y curl wget cmake ccache p7zip-full gcc-multilib g++-multilib build-essential zlib1g:i386 libstdc++6:i386 openjdk-8-jdk xz-utils git python2.7 python-minimal
+#  - dpkg --add-architecture i386
+#  - apt update
+#  - apt install -y curl wget cmake ccache p7zip-full gcc-multilib g++-multilib build-essential zlib1g:i386 libstdc++6:i386 openjdk-8-jdk xz-utils git python2.7 python-minimal
   - curl -s http://dl.google.com/android/android-sdk_r23.0.2-linux.tgz | tar xzf -
   - curl https://archive.apache.org/dist/ant/binaries/apache-ant-1.10.8-bin.tar.xz | tar xJ
   - export ANDROID_HOME=$PWD/android-sdk-linux
