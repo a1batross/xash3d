@@ -15,7 +15,8 @@ cache:
     - ccache
 
 linux_dedicated:
-  image: ubuntu:xenial
+#  image: ubuntu:xenial
+  image: build_xash:xenial_dedicated
   stage: linux_dedicated
   before_script:
   - dpkg --add-architecture i386
@@ -43,7 +44,8 @@ linux_dedicated:
     - $CI_JOB_STAGE/engine/xash3d
 
 linux_dedicated_bionic:
-  image: ubuntu:bionic
+#  image: ubuntu:bionic
+  image: build_xash:bionic_dedicated
   stage: linux_dedicated_bionic
   before_script:
   - dpkg --add-architecture i386
